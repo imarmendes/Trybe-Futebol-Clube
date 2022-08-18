@@ -1,4 +1,4 @@
-import { DATE, INTEGER, Model, STRING } from 'sequelize';
+import { INTEGER, Model, STRING } from 'sequelize';
 import db from '.';
 
 class User extends Model {
@@ -7,8 +7,6 @@ class User extends Model {
   role!: string;
   email!: string;
   password!: string;
-  createdAt!: Date;
-  updatedAt!: Date;
 }
 
 User.init({
@@ -34,18 +32,11 @@ User.init({
     type: STRING,
     allowNull: false,
   },
-  createdAt: {
-    type: DATE,
-    allowNull: false,
-  },
-  updatedAt: {
-    type: DATE,
-    allowNull: false,
-  },
 }, {
   sequelize: db,
   modelName: 'users',
   underscored: true,
+  timestamps: false,
 });
 
 export default User;
