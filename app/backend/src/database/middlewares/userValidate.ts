@@ -8,7 +8,7 @@ export default class UserValidate {
     const regex = /\S+@\S+\.\S+/;
     if (!regex.test(email)) {
       const e = new Error('Incorrect email or password');
-      e.name = 'Inválid';
+      e.name = 'NotFoundError';
       throw e;
     }
   }

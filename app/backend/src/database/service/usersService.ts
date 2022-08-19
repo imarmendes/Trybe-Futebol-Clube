@@ -1,7 +1,6 @@
 import * as bcryptjs from 'bcryptjs';
 import UserValidate from '../middlewares/userValidate';
 import User from '../models/user';
-// import { passwordService } from "./passwordService";
 import JwtService from './JwtService';
 
 export default class UserService {
@@ -27,5 +26,23 @@ export default class UserService {
     });
 
     return token;
+  }
+
+  static async validate(authorization: string | undefined): Promise<string> {
+    if (!authorization) {
+      const e = new Error('User not authorized');
+      e.name = 'NotFoundError';
+      throw e;
+    }
+
+    const tokenVerify = JwtService.decode(authorization);
+    const user = await User.findByPk(tokenVerify.id);
+
+    if (!user) {
+      const e = new Error('Incorrect email or password');
+      e.name = 'NotFoundError';
+      throw e;
+    }
+    return user.role;
   }
 }

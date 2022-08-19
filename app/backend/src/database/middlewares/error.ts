@@ -6,8 +6,6 @@ const errorMiddleware: ErrorRequestHandler = (err, _req, res, _next) => {
   switch (name) {
     case 'ValidationError': res.status(StatusCodes.BAD_REQUEST).json({ message });
       break;
-    case 'Inválid': res.status(StatusCodes.UNAUTHORIZED).json({ message });
-      break;
     case 'NotFoundError': res.status(StatusCodes.UNAUTHORIZED).json({ message });
       break;
     case 'ConflictError': res.status(StatusCodes.CONFLICT).json({ message });
