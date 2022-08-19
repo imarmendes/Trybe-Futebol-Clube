@@ -1,22 +1,20 @@
 import { ErrorRequestHandler } from 'express';
+import { StatusCodes } from 'http-status-codes';
 
 const errorMiddleware: ErrorRequestHandler = (err, _req, res, _next) => {
   const { name, message } = err;
   switch (name) {
-    case 'ValidationError':
-      res.status(400).json({ message });
+    case 'ValidationError': res.status(StatusCodes.BAD_REQUEST).json({ message });
       break;
-    case 'NotFoundError':
-      res.status(404).json({ message });
+    case 'Inválid': res.status(StatusCodes.UNAUTHORIZED).json({ message });
       break;
-    case 'ConflictError':
-      res.status(409).json({ message });
+    case 'NotFoundError': res.status(StatusCodes.UNAUTHORIZED).json({ message });
       break;
-    case 'SequelizeConnectionRefusedError':
-      res.status(503).end();
+    case 'ConflictError': res.status(StatusCodes.CONFLICT).json({ message });
       break;
-    default:
-      res.status(500).json({ message });
+    case 'SequelizeConnectionRefusedError': res.status(StatusCodes.SERVICE_UNAVAILABLE).end();
+      break;
+    default: res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message });
       break;
   }
 };
