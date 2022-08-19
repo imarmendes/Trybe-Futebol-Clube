@@ -1,4 +1,4 @@
-import * as sinon from 'sinon';
+/*import * as sinon from 'sinon';
 import * as chai from 'chai';
 // @ts-ignore
 import chaiHttp = require('chai-http');
@@ -10,9 +10,9 @@ import { Response } from 'superagent';
 
 chai.use(chaiHttp);
 
-const { expect } = chai;
+const { expect } = chai;*/
 
-describe('Seu teste', () => {
+// describe('Seu teste', () => {
   /**
    * Exemplo do uso de stubs com tipos
    */
@@ -39,7 +39,7 @@ describe('Seu teste', () => {
   //   expect(...)
   // });
 
-  it('Seu sub-teste', () => {
-    expect(false).to.be.eq(true);
-  });
-});
+  // it('Seu sub-teste', () => {
+  //   expect(false).to.be.eq(true);
+  // });
+// });
