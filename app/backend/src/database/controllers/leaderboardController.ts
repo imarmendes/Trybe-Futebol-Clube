@@ -7,4 +7,9 @@ export default class LeaderboardController {
     const leaderboard = await LeaderboardService.home();
     res.status(StatusCodes.OK).json(leaderboard);
   }
+
+  static async away(_req: Request, res: Response): Promise<void> {
+    const leaderboard = await LeaderboardService.away();
+    res.status(StatusCodes.OK).json(leaderboard);
+  }
 }
