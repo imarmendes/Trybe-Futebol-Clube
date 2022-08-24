@@ -19,7 +19,7 @@ export default class MatchesService {
     return matches;
   }
 
-  static async inProgress(inProgress: string): Promise<Matches[] | null> {
+  static async inProgress(inProgress: string): Promise<IMatches[]> {
     const matches = await Matches.findAll({
       include: [{
         model: Teams,
@@ -32,10 +32,10 @@ export default class MatchesService {
         attributes: ['teamName'],
       }],
       where: { inProgress: JSON.parse(inProgress) } });
-    return matches as any as Matches[];
+    return matches as any as IMatches[];
   }
 
-  static async createMatches(matchesIn: IMatches): Promise<IMatches> {
+  static async createMatches(matchesIn: Matches): Promise<Matches> {
     if (matchesIn.homeTeam === matchesIn.awayTeam) {
       const e = new Error('It is not possible to create a match with two equal teams');
       e.name = 'NotFoundError';
@@ -50,7 +50,7 @@ export default class MatchesService {
         throw e;
       }
     }
-    const matches: IMatches = await Matches.create({ ...matchesIn, inProgress: true });
+    const matches: Matches = await Matches.create({ ...matchesIn, inProgress: true });
     return matches;
   }
 

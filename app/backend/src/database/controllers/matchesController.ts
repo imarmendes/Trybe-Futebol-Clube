@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { IMatches } from '../interfaces/IMatches';
+import Matches from '../models/matches';
 import JwtService from '../service/JwtService';
 import MatchesService from '../service/matchesService';
 
@@ -10,7 +10,7 @@ export default class MatchesController {
 
     if (inProgress) {
       const matches = await MatchesService.inProgress(String(inProgress));
-      res.status(StatusCodes.OK).json({ matches });
+      res.status(StatusCodes.OK).json(matches);
       return;
     }
 
@@ -29,7 +29,7 @@ export default class MatchesController {
         throw e;
       }
     }
-    const matchesIn: IMatches = req.body;
+    const matchesIn: Matches = req.body;
     const matches = await MatchesService.createMatches(matchesIn);
     res.status(StatusCodes.CREATED).json(matches);
   }
