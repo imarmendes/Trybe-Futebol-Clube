@@ -12,4 +12,9 @@ export default class LeaderboardController {
     const leaderboard = await LeaderboardService.away();
     res.status(StatusCodes.OK).json(leaderboard);
   }
+
+  static async allMatches(_req: Request, res: Response): Promise<void> {
+    const leaderboard = await LeaderboardService.allMatches();
+    res.status(StatusCodes.OK).json(leaderboard);
+  }
 }
