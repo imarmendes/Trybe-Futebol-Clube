@@ -4,12 +4,12 @@ import LeaderboardService from '../service/leaderboardService';
 
 export default class LeaderboardController {
   static async home(_req: Request, res: Response): Promise<void> {
-    const leaderboard = await LeaderboardService.home();
+    const leaderboard = await LeaderboardService.matchesHomeAndAway('home');
     res.status(StatusCodes.OK).json(leaderboard);
   }
 
   static async away(_req: Request, res: Response): Promise<void> {
-    const leaderboard = await LeaderboardService.away();
+    const leaderboard = await LeaderboardService.matchesHomeAndAway('away');
     res.status(StatusCodes.OK).json(leaderboard);
   }
 
